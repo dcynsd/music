@@ -75,7 +75,7 @@ class Music
 
         $result = $this->postResponse(sprintf(self::SONG_LRC_URL, $song_id));
 
-        return $result['lrc']['lyric'] ?? '';
+        return $result['lrc']['lyric'];
     }
 
     public function getHttpClient()
