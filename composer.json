@@ -1,0 +1,27 @@
+{
+    "name": "dcynsd/music",
+    "description": "A get music list SDK",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "dcynsd",
+            "email": "dcynsd@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "phpunit/phpunit": "^7.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dcynsd\\Music\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dcynsd\\Music\\ServiceProvider"
+            ]
+        }
+    }
+}
