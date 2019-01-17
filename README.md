@@ -58,6 +58,9 @@ $songList = $music->getSongList('168176594');
 
 ```
 getSongList(string $song_list_id, bool $lrc = false)
+
+1. $song_list_id：歌单 ID
+2. $lrc：是否需要歌词
 ```
 
 ## 在 Laravel 中使用
@@ -67,31 +70,31 @@ getSongList(string $song_list_id, bool $lrc = false)
 ### 方法参数注入
 
 ```
-    .
-    .
-    .
-    public function index(Music $music) 
-    {
-        $response = $music->getSongList('168176594');
-    }
-    .
-    .
-    .
+.
+.
+.
+public function index(Music $music) 
+{
+    $response = $music->getSongList('168176594');
+}
+.
+.
+.
 ```
 
 ### 服务名访问
 
 ```
-    .
-    .
-    .
-    public function index() 
-    {
-        $response = app('music')->getSongList('168176594');
-    }
-    .
-    .
-    .
+.
+.
+.
+public function index() 
+{
+    $response = app('music')->getSongList('168176594');
+}
+.
+.
+.
 ```
 
 ## License
