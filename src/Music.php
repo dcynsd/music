@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the dcynsd/music.
+ *
+ * (c) dcynsd <dcynsd@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Dcynsd\Music;
 
 use Dcynsd\Music\Exceptions\HttpException;
@@ -9,23 +18,24 @@ use GuzzleHttp\Client;
 class Music
 {
     // 歌单 API 地址
-    const PLAY_LIST_URL = "https://music.163.com/api/playlist/detail?id=%s";
+    const PLAY_LIST_URL = 'https://music.163.com/api/playlist/detail?id=%s';
 
     // 歌曲 API 地址
-    const SONG_URL = "https://music.163.com/song/media/outer/url?id=%s.mp3";
+    const SONG_URL = 'https://music.163.com/song/media/outer/url?id=%s.mp3';
 
     // 歌词 API 地址
-    const SONG_LRC_URL = "https://music.163.com/api/song/lyric?os=pc&id=%s&lv=-1&kv=-1&tv=-1";
+    const SONG_LRC_URL = 'https://music.163.com/api/song/lyric?os=pc&id=%s&lv=-1&kv=-1&tv=-1';
 
     protected $guzzleOptions = [];
 
     /**
-     * 获取歌单列表
+     * 获取歌单列表.
      *
-     * @param      $song_list_id    歌单 ID
-     * @param bool $lrc 是否需要歌词
+     * @param      $song_list_id 歌单 ID
+     * @param bool $lrc          是否需要歌词
      *
      * @return array
+     *
      * @throws HttpException
      * @throws InvalidArgumentException
      */
@@ -41,7 +51,7 @@ class Music
 
         $result = $this->postResponse(sprintf(self::PLAY_LIST_URL, $song_list_id));
 
-        if ($result['code'] !== 200) {
+        if (200 !== $result['code']) {
             throw new InvalidArgumentException('no resource');
         }
 
@@ -49,11 +59,12 @@ class Music
     }
 
     /**
-     * 获取歌词
+     * 获取歌词.
      *
      * @param $song_id   歌曲 ID
      *
      * @return string
+     *
      * @throws HttpException
      */
     public function getSongLrc($song_id)
@@ -63,6 +74,7 @@ class Music
         }
 
         $result = $this->postResponse(sprintf(self::SONG_LRC_URL, $song_id));
+
         return $result['lrc']['lyric'] ?? '';
     }
 
@@ -78,7 +90,7 @@ class Music
 
     protected function formatArtists($artists)
     {
-        return join(',', array_map(function ($artist) {
+        return implode(',', array_map(function ($artist) {
             return $artist['name'];
         }, $artists));
     }
@@ -87,12 +99,12 @@ class Music
     {
         return array_map(function ($song) use ($lrc) {
             return [
-                'id'     => $song['id'],
-                'name'   => $song['name'],
+                'id' => $song['id'],
+                'name' => $song['name'],
                 'artist' => $this->formatArtists($song['artists']),
-                'url'    => sprintf(self::SONG_URL, $song['id']),
-                'cover'  => $song['album']['picUrl'],
-                'lrc'    => $lrc === true ? $this->getSongLrc($song['id']) : null,
+                'url' => sprintf(self::SONG_URL, $song['id']),
+                'cover' => $song['album']['picUrl'],
+                'lrc' => true === $lrc ? $this->getSongLrc($song['id']) : null,
             ];
         }, $songList);
     }
