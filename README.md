@@ -2,9 +2,12 @@
 
 <p align="center"> 一个简易的获取网易云音乐歌单的扩展.</p>
 
-[![Build Status](https://travis-ci.org/dcynsd/music.svg?branch=master)](https://travis-ci.org/dcynsd/music)
+<p align="center">
 
+[![Build Status](https://travis-ci.org/dcynsd/music.svg?branch=master)](https://travis-ci.org/dcynsd/music)
 ![StyleCI build status](https://github.styleci.io/repos/166193388/shield) 
+
+</p
 
 ## 安装
 
