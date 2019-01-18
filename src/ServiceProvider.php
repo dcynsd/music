@@ -18,7 +18,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function register()
     {
         $this->app->singleton(Music::class, function () {
-            return new Weather();
+            return new Music();
         });
 
         $this->app->alias(Music::class, 'music');

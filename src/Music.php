@@ -69,7 +69,7 @@ class Music
      */
     public function getSongLrc($song_id)
     {
-        if (!$song_id || !is_numeric($song_id) || !is_string($song_id)) {
+        if (!$song_id) {
             throw new InvalidArgumentException('Invalid song_id value');
         }
 
